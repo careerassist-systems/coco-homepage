@@ -249,6 +249,14 @@ section > .wrap{position:relative;z-index:1}
 .ft .co a{color:#fff;text-decoration:underline}
 .ft .cp{margin-top:72px;padding-top:24px;border-top:1px solid rgba(255,255,255,.2);font-size:12px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
+.mnav{display:none;position:relative}
+.mnav summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 16px;border-radius:999px;background:var(--ink);color:#fff;font-family:var(--jp);font-weight:700;font-size:14px}
+.mnav summary::-webkit-details-marker{display:none}
+.mnav summary::before{content:"";width:14px;height:10px;border-top:2px solid #fff;border-bottom:2px solid #fff;box-shadow:inset 0 2px 0 0 transparent;background:linear-gradient(#fff,#fff) center/100% 2px no-repeat}
+.mnav[open] summary{background:var(--sun-d)}
+.mnav-p{position:absolute;right:0;top:calc(100% + 10px);width:min(86vw,320px);background:#fff;border-radius:24px;box-shadow:0 20px 50px rgba(46,40,35,.2);padding:10px;display:grid;z-index:50}
+.mnav-p a{text-decoration:none;font-family:var(--jp);font-weight:700;font-size:17px;padding:14px 16px;border-radius:14px;color:var(--ink)}
+.mnav-p a[aria-current="page"]{background:var(--sun-l);color:var(--sun-d)}
 /* 見学への導線 */
 .visit{display:inline-flex;align-items:center;gap:8px;background:var(--sun-d);color:#fff;text-decoration:none;font-family:var(--jp);font-weight:700;font-size:15px;padding:0 20px;min-height:44px;border-radius:999px}
 .visit:hover{background:var(--ink)}
@@ -351,45 +359,90 @@ section > .wrap{position:relative;z-index:1}
 @media (prefers-reduced-motion:reduce){.count{--n:var(--to)}}
 
 @media (max-width:900px){
- .wrap{padding:0 20px}
- section{padding:80px 0}
+ .wrap{padding:0 18px}
+ section{padding:72px 0}
  .hero-g,.phil,.price,.sh,.igb,.ft-g,.g2,.g3,.pt-g{grid-template-columns:minmax(0,1fr)}
- .hero h1{font-size:clamp(30px,10vw,46px)}
- .hero-side{display:none}
- .badge{left:0;width:128px;height:128px;bottom:-10px}
- .badge .c b{font-size:30px}.badge .c{font-size:15px}
+ /* ヘッダー：1行に（ロゴ／文字を大きく／メニュー） */
+ .hd{position:sticky;top:0}
+ .hd-in{min-height:64px;gap:10px;flex-wrap:nowrap}
+ .brand .m{height:28px}.brand .w{height:30px}
+ .nav,.ig,.visit{display:none}
+ .mnav{display:block}
+ .sz{font-size:12px;padding:6px 10px;min-height:36px}
+ /* ヒーロー：PCと同じくバッジを残す */
+ .hero{padding:28px 0 0}
+ .hero-g{gap:20px}
+ .hero-side{display:block;order:-1;justify-self:end;width:112px;height:112px;margin:0 0 -64px}
+ .hero-side .badge{width:112px;height:112px}
+ .hero-side .badge .c{font-size:12px}.hero-side .badge .c b{font-size:30px}
+ .badge svg text{font-size:19px}
+ .status{max-width:calc(100% - 120px)}
+ .hero h1{font-size:clamp(30px,10vw,46px);margin-top:28px}
+ .hero .sub{font-size:15px;margin-top:20px}
+ .cta{margin-top:28px}
+ .btn{min-height:52px;padding:0 22px;font-size:15px}
+ .dot.a{width:70px;height:70px;right:-24px;top:auto;bottom:40%}.dot.b{display:none}
+ /* 数字の帯：2×2で崩れないように */
+ .spec{margin-top:56px}
  .spec-in{grid-template-columns:repeat(2,minmax(0,1fr))}
- .spec-in > div{padding:28px 16px;border-bottom:1px solid rgba(46,40,35,.18)}
+ .spec-in > div{padding:22px 12px 24px;border-bottom:1px solid rgba(46,40,35,.18)}
  .spec-in > div:nth-child(odd){padding-left:0}
- .num{font-size:52px}
- .sh{gap:16px;margin-bottom:40px}
- .sh h2,.phil h2{font-size:34px}
- .ghost{font-size:110px}
- .gal figure{width:280px;height:360px}.gal figure:nth-child(even){width:240px;height:300px;margin-top:40px}
- .mos{grid-template-columns:minmax(0,1fr)}
- .m1,.m2,.m3,.m4,.m5,.m6{grid-column:auto;height:300px}
- .big{font-size:76px}
- .pricebox{padding:40px 28px}
- .pt-band h1{font-size:40px}
- .pt-ph{height:260px}
- .tbl th{width:38%}
- .day li{grid-template-columns:110px minmax(0,1fr)}
- .steps li{grid-template-columns:64px minmax(0,1fr);padding:24px 20px}
- .igb .h{font-size:38px}
- .route,.choose,.pr{grid-template-columns:minmax(0,1fr)}
- .hd{position:static}
+ .spec-in > div:nth-child(2n){border-right:none}
+ .spec-in > div:nth-child(n+3){border-bottom:none}
+ .num{font-size:40px;white-space:nowrap}
+ .num small{font-size:13px;margin-left:3px}
+ .spec .l{font-size:12px;margin-top:8px;line-height:1.6}
+ /* 見出し・カード */
+ .sh{gap:12px;margin-bottom:32px}
+ .sh h2,.phil h2,.price h2{font-size:30px !important}
+ .ghost{font-size:96px;top:24px}
+ .phil{gap:32px}
+ .phil .mk{width:110px}
+ .pt{grid-template-columns:48px minmax(0,1fr);gap:12px;padding:22px 20px;border-radius:22px}
+ .pt .no{font-size:32px}
+ .pt h3{font-size:18px}
+ .pr{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .pr li{padding:20px 16px;border-radius:22px}
+ .pr h3{font-size:16px}.pr p{font-size:13px}
+ .motto{font-size:19px;margin-top:32px;gap:12px}
+ .gal figure{width:240px;height:320px;border-radius:24px}.gal figure:nth-child(even){width:210px;height:270px;margin-top:40px}
+ .gal-t{gap:12px;padding:0 18px}
+ .mos{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .m1{grid-column:span 2;height:240px}.m2,.m3,.m4,.m5,.m6{grid-column:auto;height:200px}
+ .mos figure{border-radius:20px}
+ .big{font-size:64px}
+ .pricebox{padding:36px 24px;border-radius:30px}
+ .cd{padding:26px 22px;border-radius:24px}
+ .cd .fig{font-size:44px}
+ .pt-band{padding:44px 0 56px}
+ .pt-band h1{font-size:36px}
+ .pt-ph{height:220px;border-radius:120px 24px 120px 24px}
+ .tbl{font-size:15px}
+ .tbl th{width:36%}
+ .tbl td.y{font-size:19px}
+ .day li{grid-template-columns:104px minmax(0,1fr);gap:12px}
+ .day time{font-size:18px}
+ .steps li{grid-template-columns:56px minmax(0,1fr);padding:22px 18px}
+ .steps li::before{font-size:32px}
+ .igb{gap:24px}
+ .igb .qr{width:130px;height:130px}
+ .igb .h{font-size:34px}
+ .route,.choose{grid-template-columns:minmax(0,1fr)}
  .route li:not(:last-child)::after{right:50%;top:auto;bottom:-14px;transform:translateX(50%) rotate(135deg)}
- .ctab h2{font-size:34px}
+ .ctab{padding:72px 0}
+ .ctab h2{font-size:30px}
+ .ch{padding:26px 24px}.ch .big2{font-size:32px}
  .fab{left:10px;right:10px;bottom:10px;justify-content:center}
  .fab a{flex:1;justify-content:center;padding:0 10px;font-size:14px}
  .fab .f-tel b{font-size:14px}
  .ft{padding-bottom:110px}
- .visit{display:none}
- .tl li{grid-template-columns:100px minmax(0,1fr)}
- .cross{height:180px}
- .marq-t{font-size:22px;padding:16px 0}.marq.two .marq-t{font-size:28px}
- .marq.two{top:100px}
+ .tl li{grid-template-columns:90px minmax(0,1fr)}
+ .cross{height:170px}
+ .marq-t{font-size:20px;padding:15px 0}.marq.two .marq-t{font-size:26px}
+ .marq.two{top:96px}
+ .mapbox iframe{height:300px}
 }
+@media (max-width:360px){.pr{grid-template-columns:minmax(0,1fr)}.num{font-size:34px}}
 
 .t5{--to:5}.t16{--to:16}.t2{--to:2}.t87{--to:87}
 
@@ -401,6 +454,7 @@ section > .wrap{position:relative;z-index:1}
 <div class="wrap hd-in">
 <a class="brand" href="index.html" aria-label="グループホームCOCO トップへ"><img class="m" src="logo-mark.png" alt=""><img class="w" src="logo-word.png" alt="グループホームCOCO"></a>
 <nav class="nav" aria-label="メインメニュー"><a href="index.html">トップ</a><a href="sumai.html" aria-current="page">住まいと暮らし</a><a href="riyou.html">ご利用案内</a><a href="recruit.html">スタッフ募集</a><a href="contact.html">お問い合わせ</a></nav>
+<details class="mnav"><summary>メニュー</summary><nav class="mnav-p" aria-label="メニュー"><a href="index.html">トップ</a><a href="sumai.html" aria-current="page">住まいと暮らし</a><a href="riyou.html">ご利用案内</a><a href="recruit.html">スタッフ募集</a><a href="contact.html">お問い合わせ</a><a href="https://www.instagram.com/group.home.coco/">Instagram</a></nav></details>
 <div class="tools">
 <button class="sz" type="button" id="size-btn" aria-pressed="false">文字を大きく</button>
 <a class="ig" href="https://www.instagram.com/group.home.coco/" aria-label="Instagram @group.home.coco"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1" fill="currentColor"></circle></svg></a>
