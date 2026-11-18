@@ -308,7 +308,7 @@ section > .wrap{position:relative;z-index:1}
 @keyframes count{from{--n:0}to{--n:var(--to)}}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(201,106,67,.6)}70%{box-shadow:0 0 0 10px rgba(201,106,67,0)}100%{box-shadow:0 0 0 0 rgba(201,106,67,0)}}
 @keyframes ghost{from{transform:translateX(5%)}to{transform:translateX(-30%)}}
-@keyframes drift{from{transform:translateX(4%)}to{transform:translateX(-38%)}}
+@keyframes drift{from{transform:translateX(0)}to{transform:translateX(-36%)}}
 @keyframes popIn{from{opacity:.2;transform:translateY(60px) scale(.94) rotate(-2deg)}to{opacity:1;transform:none}}
 @keyframes wipe{from{clip-path:inset(0 0 0 100% round 40px)}to{clip-path:inset(0 0 0 0 round 40px)}}
 @keyframes scaleUp{from{transform:scale(.86);border-radius:120px}to{transform:none}}
@@ -367,7 +367,9 @@ section > .wrap{position:relative;z-index:1}
  .hd-in{min-height:64px;gap:10px;flex-wrap:nowrap}
  .brand .m{height:28px}.brand .w{height:30px}
  .nav,.ig,.visit{display:none}
- .mnav{display:block}
+ .mnav{display:block;position:static}
+ .hd-in{position:relative}
+ .mnav-p{left:12px;right:12px;width:auto;top:calc(100% + 4px)}
  .sz{font-size:12px;padding:6px 10px;min-height:36px}
  /* ヒーロー：PCと同じくバッジを残す */
  .hero{padding:28px 0 0}
@@ -405,8 +407,11 @@ section > .wrap{position:relative;z-index:1}
  .pr li{padding:20px 16px;border-radius:22px}
  .pr h3{font-size:16px}.pr p{font-size:13px}
  .motto{font-size:19px;margin-top:32px;gap:12px}
- .gal figure{width:240px;height:320px;border-radius:24px}.gal figure:nth-child(even){width:210px;height:270px;margin-top:40px}
- .gal-t{gap:12px;padding:0 18px}
+ .gal{overflow:visible;padding:0}
+ .gal-t{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;width:auto;padding:0 18px;animation:none !important;transform:none !important}
+ .gal figure,.gal figure:nth-child(even){width:auto;height:210px;margin-top:0;border-radius:20px}
+ .gal figure:first-child{grid-column:span 2;height:240px}
+ .gal figcaption{font-size:12px;padding:6px 12px;left:10px;bottom:10px}
  .mos{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
  .m1{grid-column:span 2;height:240px}.m2,.m3,.m4,.m5,.m6{grid-column:auto;height:200px}
  .mos figure{border-radius:20px}
